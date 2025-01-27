@@ -1,0 +1,28 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: Base64loop
+
+Parameters:
+  RuleBase64:
+    Type: String
+  ResolverEndpointId:
+    Type: String
+
+Resources:
+  ResolverRules:
+    Type: AWS::Route53Resolver::ResolverRule
+    Base64loop: RuleBase64
+    Properties:
+      DomainName: "!Base64loop name"
+      ResolverEndpointId: !Sub ResolverEndpointId
+      RuleType: FORWARD
+      TargetIps: "!Base64loop fwdips"
+
+  ResolverRuleShare:
+    Type: AWS::RAM::ResourceShare
+    Base64loopArn: RuleBase64
+    Properties:
+      Name: "ResolverRules"
+      ResourceArns: "!Base64loopArn"
+      Principals:
+        - ${AWS::AccountId}

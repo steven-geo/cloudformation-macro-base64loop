@@ -1,0 +1,42 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: Base64loop
+
+Parameters:
+  RuleBase64:
+    Type: String
+
+Resources:
+  TestingBucket:
+    Type: AWS::S3::Bucket
+    Base64loop: RuleBase64
+    Properties:
+      BucketName: "!Base64loop name"
+
+  TestRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+
+  TestPolicy:
+    Type: "AWS::IAM::Policy"
+    Base64loopArn: RuleBase64
+    Properties:
+      Roles:
+        - Ref: TestRole
+      PolicyName: S3BucketTesting
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Action:
+              - "s3:*"
+            Resource: "!Base64loopArn"

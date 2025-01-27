@@ -1,0 +1,28 @@
+{
+    "domainnamecom": {
+        "name": "domainname.com",
+        "fwdips": [
+            {
+                "Ip": "1.1.1.1",
+                "Port": 53
+            },
+            {
+                "Ip": "8.8.8.8",
+                "Port": 53
+            }
+        ]
+    },
+    "somethingcom": {
+        "name": "something.com",
+        "fwdips": [
+            {
+                "Ip": "1.1.1.1",
+                "Port": 53
+            },
+            {
+                "Ip": "8.8.8.8",
+                "Port": 53
+            }
+        ]
+    }
+}
